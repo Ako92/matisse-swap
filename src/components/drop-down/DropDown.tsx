@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, {SelectChangeEvent, selectClasses} from '@mui/material/Select';
 import {makeStyles} from '@mui/styles';
 import {Theme} from '@mui/material/styles';
+import {FormControl, InputLabel} from '@mui/material';
 
 interface IDropDown {
     onChange: (value: string) => void;
@@ -12,10 +13,9 @@ interface IDropDown {
 }
 
 
-const useStyles = makeStyles((theme:Theme )=>({
-
+const useStyles = makeStyles((theme: Theme) => ({
     select: {
-        borderColor:theme.palette.primary.main,
+        borderColor: theme.palette.primary.main,
         height: "64px",
         width: "261px",
         justifyContent: "center",
@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme:Theme )=>({
             alignItems: "center",
             '& img': {
                 paddingRight: "16px",
-                paddingLeft: "24px",            }
+                paddingLeft: "24px",
+            }
         },
     },
     icon: {
@@ -37,6 +38,9 @@ const useStyles = makeStyles((theme:Theme )=>({
         alignItems: "center",
         paddingRight: "16px",
         paddingLeft: "24px",
+    },
+    inputLabel:{
+        fontSize:"20px",
     }
 }));
 
@@ -50,24 +54,28 @@ export default function DropDown({items, onChange, id, currentSelected}: IDropDo
         } = event;
         onChange(value.toString());
     };
-    return (
-        <Select
-            labelId={id}
-            id={id}
-            value={currentSelected}
-            onChange={handleChange}
-            className={styles.select}
-        >
-            {items.map((item) => (
-                <MenuItem
-                    key={item.name}
-                    value={item.index}
-                >
-                    <img className={styles.icon} src={`/icons/${item.icon}.png`} alt={item.icon}/>
 
-                    {item.name}
-                </MenuItem>
-            ))}
-        </Select>
+    return (
+        <FormControl>
+            <InputLabel className={styles.inputLabel} id="Select-item" htmlFor={id} shrink={false}>{currentSelected === '' && 'Select'}</InputLabel>
+            <Select
+                labelId={id}
+                id={id}
+                value={currentSelected}
+                onChange={handleChange}
+                className={styles.select}
+            >
+                {items.map((item) => (
+                    <MenuItem
+                        key={item.name}
+                        value={item.index}
+                    >
+                        <img className={styles.icon} src={`/icons/${item.icon}.png`} alt={item.icon}/>
+
+                        {item.name}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
     )
 }
