@@ -15,7 +15,7 @@ interface Props extends TStyles {
     text?: string;
     preIcon?: string;
     postIcon?: string;
-
+    onClick: () => void;
 }
 
 
@@ -48,7 +48,7 @@ const useStyles = makeStyles({
 export default function ({color, isFullWidth, ...props}: Props & Omit<ButtonProps, keyof Props>) {
     const classes = useStyles({color, isFullWidth});
     return (
-        <Button className={classes.root} variant={props.variant} disabled={props.isDisabled}>
+        <Button className={classes.root} variant={props.variant} disabled={props.isDisabled} onClick={props.onClick}>
             {props.preIcon &&
             <img src={`/icons/${props.preIcon}.png`} alt={props.preIcon}/>}
             {props.text && <span className={classes.span}>
