@@ -1,6 +1,7 @@
 import React from 'react'
 import Button, {ButtonProps} from '@mui/material/Button';
 import {makeStyles} from '@mui/styles';
+import {Theme} from '@mui/material/styles';
 
 
 type TColor = 'grey' | 'blue';
@@ -19,13 +20,13 @@ interface Props extends TStyles {
 }
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme:Theme)=>({
     root: {
         width: (Props: TStyles) => Props.isFullWidth ? "100%" : "200px",
         color: (props: TStyles) =>
             props.color === 'grey' ? '#525F7B' : '#FFFFFF',
         backgroundColor: (props: TStyles) =>
-            props.color === 'grey' ? '#B3BCD0' : '#1F6DC9',
+            props.color === 'grey' ? theme.palette.primary.main : theme.palette.secondary.main,
         display: "flex",
         height: "64px",
         flexDirection: "row",
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
         borderRadius: 0,
         '&:hover': {
             backgroundColor: (props: TStyles) =>
-                props.color === 'grey' ? '#B3BCD0' : '#1F6DC9',
+                props.color === 'grey' ? theme.palette.primary.main : theme.palette.secondary.main,
             borderColor: 'none',
             boxShadow: 'none',
         },
@@ -43,7 +44,7 @@ const useStyles = makeStyles({
     span: {
         margin: "0px 16px"
     }
-});
+}));
 
 export default function ({color, isFullWidth, ...props}: Props & Omit<ButtonProps, keyof Props>) {
     const classes = useStyles({color, isFullWidth});
