@@ -14,6 +14,10 @@ interface IDropDown {
 
 
 const useStyles = makeStyles((theme: Theme) => ({
+    container:{
+        height: "64px",
+        minWidth: "261px",
+    },
     select: {
         borderColor: theme.palette.primary.main,
         height: "64px",
@@ -54,9 +58,8 @@ export default function DropDown({items, onChange, id, currentSelected}: IDropDo
         } = event;
         onChange(value.toString());
     };
-
     return (
-        <FormControl>
+        <FormControl className={styles.container}>
             <InputLabel className={styles.inputLabel} id="Select-item" htmlFor={id} shrink={false}>{currentSelected === '' && 'Select'}</InputLabel>
             <Select
                 labelId={id}
