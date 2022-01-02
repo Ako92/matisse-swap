@@ -4,7 +4,7 @@ import {makeStyles} from '@mui/styles';
 import {Theme} from '@mui/material/styles';
 
 
-type TColor = 'grey' | 'blue';
+type TColor = 'grey' | 'dark-blue' | "blue";
 
 interface TStyles {
     color: TColor;
@@ -20,13 +20,16 @@ interface Props extends TStyles {
 }
 
 
-const useStyles = makeStyles((theme:Theme)=>({
+const useStyles = makeStyles((theme: Theme) => ({
     root: {
         width: (Props: TStyles) => Props.isFullWidth ? "100%" : "200px",
         color: (props: TStyles) =>
             props.color === 'grey' ? '#525F7B' : '#FFFFFF',
-        backgroundColor: (props: TStyles) =>
-            props.color === 'grey' ? theme.palette.primary.main : theme.palette.secondary.main,
+        backgroundColor: (props: TStyles) => {
+            if (props.color === 'grey') return theme.palette.primary.main;
+            if (props.color === "blue") return "rgba(31, 109, 201, 1)";
+            if (props.color === "dark-blue") return theme.palette.secondary.main;
+        },
         display: "flex",
         height: "64px",
         flexDirection: "row",
