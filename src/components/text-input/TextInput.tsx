@@ -7,25 +7,26 @@ import {Button} from '@mui/material';
 
 interface TabProps {
     topLabel: string;
-    bottomLabel: string;
+    bottomLabel: string | undefined;
     defaultValue: string;
-    helperText: string;
     hasError: boolean;
     onChange: (value: string) => void;
     id: string;
     isDisabled: boolean;
-    innerInputButton?: {
+    innerInputButton: {
         text: string;
         action: () => void;
     };
-    topRightLabel?: string;
+    topRightLabel: string | undefined;
+    hasInnerButton: boolean;
+    value: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
     textField: {},
     input: {
 
-        paddingInline: "24px",
+        paddingInline: (Props: { hasInnerButton: boolean }) => Props.hasInnerButton ? "24px" : "0px",
         margin: "8px 0px",
 
     },
@@ -37,11 +38,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     label: {
         display: 'flex',
         alignSelf: "flex-start ",
-        fontSize:"14px"
+        fontSize: "14px"
     },
     topRightLabel: {
         alignSelf: "flex-end ",
-        fontSize:"14px"
+        fontSize: "14px"
     },
     inputContainer: {
         border: `1px solid ${theme.palette.primary.main}`,
@@ -78,12 +79,14 @@ export default function TextInput({
                                       id,
                                       isDisabled,
                                       innerInputButton,
-                                      topRightLabel
+                                      topRightLabel,
+                                      hasInnerButton,
+                                      value
                                   }: TabProps) {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(event?.target?.value)
     };
-    const styles = useStyles()
+    const styles = useStyles({hasInnerButton})
     return (
         <div>
             <div className={styles.topLabelsContainer}>
@@ -104,8 +107,9 @@ export default function TextInput({
                     id={id}
                     defaultValue={defaultValue}
                     disabled={isDisabled}
+                    value={value}
                 />
-                {innerInputButton &&
+                {hasInnerButton &&
                 <Button className={styles.innerInput} variant="contained" onClick={innerInputButton.action}>
                     {innerInputButton.text}
                 </Button>

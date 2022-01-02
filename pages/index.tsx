@@ -9,17 +9,25 @@ import IconButton from '../src/components/icon-button/IconButton';
 import Button from '../src/components/button/Button';
 import InputSection from '../src/components/input-section/InputSection';
 import Aside from '../src/components/aside/Aside';
+import {Theme} from '@mui/system';
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
     container: {
         maxHeight: "100vh",
         maxWidth: "100vw",
         height: "100vh",
         width: "100vw",
         padding: 0,
-        overflow: "hidden"
-
+        overflow: "auto",
+        position: 'relative',
+        "& :after": {
+            content: " ",
+            display: 'block',
+            clear: 'both',
+            visibility: 'hidden',
+            height: 0
+        }
     },
     title: {
         margin: "48px 0",
@@ -27,11 +35,12 @@ const useStyles = makeStyles({
     },
     main: {
         width: "60%",
+        [theme.breakpoints.down('md')]: {
+            width: "100%"
+        },
         margin: "0 32px"
     },
-    aside: {
-        width: "40%"
-    },
+
     firstSection: {
         display: 'flex',
         flexDirection: 'row',
@@ -52,9 +61,15 @@ const useStyles = makeStyles({
         }
     },
     swapButton: {
-        margin: "48px 0"
+        margin: "48px 0",
+        [theme.breakpoints.down('md')]: {
+            position: 'fixed',
+            bottom: "-50px",
+            width: '100%',
+            left: 0
+        },
     }
-});
+}));
 
 const FIRST_ROW_INPUT_VALUES = {
     dropdown_title: "From",
@@ -115,7 +130,8 @@ const Home: NextPage = () => {
 
                         />
                         <div className={styles.swapButton}>
-                            <Button isFullWidth={true} isDisabled={false} onClick={() => console.log("something")}
+                            <Button isFullWidth={true} isDisabled={false}
+                                    onClick={() => console.log("something")}
                                     text={"Swap"}
                                     color={"grey"}/>
                         </div>

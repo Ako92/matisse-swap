@@ -17,14 +17,15 @@ const useStyles = makeStyles((theme: Theme) => ({
         margin: '0 auto',
         fontSize: "20px",
         width: "60vw",
-        position: "relative",
+        overflow: 'auto',
+        backgroundColor: 'white',
         [theme.breakpoints.down('md')]: {
             width: "100vw",
             fontSize: "18px"
         },
     },
     tabs: {
-        position:'relative'
+        position: 'relative'
     },
     tab: {
         [`&.${tabClasses.selected}`]: {
@@ -58,10 +59,10 @@ export default function TabsComponent({children, tabChangeCallback, current_tab}
     const styles = useStyles()
     return (
         <Box className={styles.box}>
-                <Tabs className={styles.tabs} value={current_tab} onChange={handleChange} aria-label="main tab">
-                    <Tab className={styles.tab} label="Swap" {...a11yProps(0)} />
-                    <Tab className={styles.tab} label="Pool" {...a11yProps(1)} />
-                </Tabs>
+            <Tabs className={styles.tabs} value={current_tab} onChange={handleChange} aria-label="main tab">
+                <Tab className={styles.tab} label="Swap" {...a11yProps(0)} />
+                <Tab className={styles.tab} label="Pool" {...a11yProps(1)} />
+            </Tabs>
 
             <div className={styles.children}>
                 {children}
