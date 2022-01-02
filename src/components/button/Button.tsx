@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     span: {
         margin: "0px 16px",
+        width: (Props: TStyles) => Props.isFullWidth ? "100%" : "200px",
         [theme.breakpoints.down('md')]: {
             margin: (props: TStyles) =>
                 props.preIcon && props.postIcon ? "0 2px" : "0px 16px"

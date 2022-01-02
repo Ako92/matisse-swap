@@ -106,7 +106,9 @@ const Home: NextPage = () => {
         setSectionFromValues(sectionToValues);
         setSectionToValues(sectionFromValues);
     }
-
+    const EmptySection = () => <BodySection isAuthorized={authorized}>
+        <p>Empty</p>
+    </BodySection>
     return (
         <Container className={styles.container}>
             <Header isAuthorized={authorized} toggleAuthorize={toggleAuthorize}/>
@@ -115,30 +117,36 @@ const Home: NextPage = () => {
                     setTabState(index)
                 }}
                 current_tab={tabState}>
-                <BodySection isAuthorized={authorized}>
-                    <div className={styles.main}>
-                        <h1 className={styles.title}>
-                            Select a token to start swapping
-                        </h1>
-                        <InputSection isAuthorized={authorized} values={sectionFromValues} valuesCallback={setSectionFromValues}
-                                      config={FIRST_ROW_INPUT_VALUES}
-                        />
-                        <div className={styles.swapEntries}>
-                            <IconButton onClick={swapEntries} icon="SwitchAltRoundedBlue"/>
-                        </div>
-                        <InputSection isAuthorized={authorized} values={sectionToValues} valuesCallback={setSectionToValues}
-                                      config={SECOND_ROW_INPUT_VALUES}
+                {tabState === 0 ?
+                    <BodySection isAuthorized={authorized}>
+                        <div className={styles.main}>
+                            <h1 className={styles.title}>
+                                Select a token to start swapping
+                            </h1>
+                            <InputSection isAuthorized={authorized} values={sectionFromValues}
+                                          valuesCallback={setSectionFromValues}
+                                          config={FIRST_ROW_INPUT_VALUES}
+                            />
+                            <div className={styles.swapEntries}>
+                                <IconButton onClick={swapEntries} icon="SwitchAltRoundedBlue"/>
+                            </div>
+                            <InputSection isAuthorized={authorized} values={sectionToValues}
+                                          valuesCallback={setSectionToValues}
+                                          config={SECOND_ROW_INPUT_VALUES}
 
-                        />
-                        <div className={styles.swapButton}>
-                            <Button isFullWidth={true} isDisabled={false}
-                                    onClick={() => console.log("something")}
-                                    text={"Swap"}
-                                    color={"grey"}/>
+                            />
+                            <div className={styles.swapButton}>
+                                <Button isFullWidth={true} isDisabled={false}
+                                        onClick={() => console.log("something")}
+                                        text={"Swap"}
+                                        color={"grey"}/>
+                            </div>
                         </div>
-                    </div>
-                    <Aside authorize={toggleAuthorize} isAuthorized={authorized}/>
-                </BodySection>
+                        <Aside authorize={toggleAuthorize} isAuthorized={authorized}/>
+                    </BodySection>
+                    : <EmptySection/>}
+
+
             </TabsComponent>
 
         </Container>
