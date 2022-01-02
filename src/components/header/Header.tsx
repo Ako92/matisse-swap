@@ -5,7 +5,8 @@ import Button from '../button/Button';
 import IconButton from '../icon-button/IconButton';
 
 type THeader = {
-    isAuthorized: boolean
+    isAuthorized: boolean;
+    toggleAuthorize: () => void
 }
 const useStyles = makeStyles((theme: Theme) => ({
     header: {
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) => ({
             height: "18px",
             minWidth: "18px",
             maxWidth: "18px",
-            '& img':{
+            '& img': {
                 width: "17px",
                 height: "17px",
 
@@ -89,15 +90,15 @@ const Header = (props: THeader) => {
                     <>
                         <Button isFullWidth={true} isDisabled={false}
                                 onClick={() => console.log("something")}
-                                text={"text"}
+                                preIcon={"Eth-mainnet"}
+                                postIcon={"RepeatRounded"}
+                                text={"0x3452...3d27"}
                                 color={"grey"}/>
-                        <IconButton isSmall={true} onClick={() => {
-                            console.log("Power BTN Clicked")
-                        }} icon="Power"/>
+                        <IconButton isSmall={true} onClick={props.toggleAuthorize} icon="Power"/>
                     </>
                     :
                     <Button isFullWidth={false} isDisabled={false}
-                            onClick={() => console.log("something")}
+                            onClick={props.toggleAuthorize}
                             text={"Connect wallet"}
                             color={"blue"}/>
                 }
