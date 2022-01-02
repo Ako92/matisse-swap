@@ -56,8 +56,19 @@ const useStyles = makeStyles((theme: Theme) => ({
         paddingRight: "30px",
     },
     label: {
-        fontSize:"14px",
+        fontSize: "14px",
+    },
+    item: {
+        display: 'flex',
+        flexDirection: "row",
+        margin: 0,
+    },
+    renderValueImg: {
+        display: "flex",
+        alignItems: "center",
+        paddingRight: "16px",
     }
+
 }));
 
 
@@ -79,14 +90,18 @@ export default function DropDown({items, onChange, id, currentSelected}: IDropDo
 
                 <InputLabel className={styles.inputLabel} id="Select-item" htmlFor={id}
                             shrink={false}>{currentSelected === '' && 'Select'}</InputLabel>
-
-
                 <Select
                     labelId={id}
                     id={id}
                     value={currentSelected}
                     onChange={handleChange}
                     className={styles.select}
+                    renderValue={() => <div className={styles.item}>
+                        <img className={styles.renderValueImg} src={`/icons/${items[+currentSelected].icon}.png`}
+                             alt={items[+currentSelected].icon}/>
+                        {items[+currentSelected].name}
+
+                    </div>}
                     IconComponent={() => <img className={styles.arrow} src={"/icons/ArrowDown.png"} alt="arrow-down"/>}
                 >
                     {items.map((item) => (
