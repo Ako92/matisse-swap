@@ -22,13 +22,20 @@ interface TabProps {
     value: string;
 }
 
+type TStyles = {
+    isDisabled: boolean;
+    hasInnerButton: boolean;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
-    textField: {},
+    wrapper: {},
     input: {
 
-        paddingInline: (Props: { hasInnerButton: boolean }) => Props.hasInnerButton ? "24px" : "0px",
+        paddingLeft: (Props: TStyles) => Props.hasInnerButton ? "24px" : "10px",
+        [theme.breakpoints.down('sm')]: {
+            paddingLeft: (Props: TStyles) => Props.hasInnerButton ? "5px" : "10px",
+        },
         margin: "8px 0px",
-
     },
     topLabelsContainer: {
         display: "flex",
@@ -46,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     inputContainer: {
         border: `1px solid ${theme.palette.primary.main}`,
+        backgroundColor: (Props: TStyles) => Props.isDisabled ? theme.palette.primary.main : "white",
         height: "64px",
         display: "flex",
         justifyContent: "center",
@@ -57,8 +65,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         backgroundColor: 'rgba(31, 109, 201, 0.2)',
         borderRadius: 0,
         height: '40px',
-        // width: '70px',
         margin: "20px",
+        [theme.breakpoints.down('sm')]: {
+            margin: "0px",
+        },
         boxShadow: 'none',
 
         '&:hover': {
@@ -86,9 +96,9 @@ export default function TextInput({
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(event?.target?.value)
     };
-    const styles = useStyles({hasInnerButton})
+    const styles = useStyles({hasInnerButton, isDisabled})
     return (
-        <div>
+        <div className={styles.wrapper}>
             <div className={styles.topLabelsContainer}>
                 {topLabel && <InputLabel className={styles.label} htmlFor={id}>
                     {topLabel}

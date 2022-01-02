@@ -13,7 +13,8 @@ type TInputSection = {
         error_text?: string;
         has_max: boolean;
     }
-    values: TValues
+    values: TValues,
+    isAuthorized: boolean
 }
 type TValues = {
     amount: string;
@@ -50,7 +51,7 @@ const coins = [
         name: "Matic",
         icon: "polygon-matic", index: "2"
     }]
-export default function InputSection({config, values, valuesCallback}: TInputSection) {
+export default function InputSection({config, values, valuesCallback, isAuthorized}: TInputSection) {
 
     const styles = useStyles()
     return (
@@ -62,9 +63,11 @@ export default function InputSection({config, values, valuesCallback}: TInputSec
                           items={coins}/>
             </div>
             <div>
-                <TextInput topLabel={config.input_title} bottomLabel={config.footer_text}
+                <TextInput
+                    topLabel={config.input_title}
+                           bottomLabel={config.footer_text}
                            topRightLabel={config.input_right_text}
-                           isDisabled={false}
+                           isDisabled={!isAuthorized}
                            innerInputButton={{
                                action: () => {
                                    valuesCallback({...values, amount: "1"})

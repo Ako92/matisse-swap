@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         flexDirection: "row",
         justifyContent: 'center',
         alignItems: 'center',
-        width: "300px",
+        width: "60%",
         [theme.breakpoints.down('md')]: {
             margin: "0 16px",
 

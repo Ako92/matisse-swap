@@ -94,9 +94,10 @@ const INIT_VALUES = {
 const Home: NextPage = () => {
     const styles = useStyles()
     const [tabState, setTabState] = React.useState(0)
-    const [authorized, setAuthorized] = React.useState(false); // this can replace with authorization methods
+    const [authorized, setAuthorized] = React.useState(false);
     const toggleAuthorize = () => {
         setAuthorized(!authorized)
+        // this can replace with authorization methods
     }
     const [sectionFromValues, setSectionFromValues] = React.useState(INIT_VALUES)
     const [sectionToValues, setSectionToValues] = React.useState(INIT_VALUES)
@@ -119,13 +120,13 @@ const Home: NextPage = () => {
                         <h1 className={styles.title}>
                             Select a token to start swapping
                         </h1>
-                        <InputSection values={sectionFromValues} valuesCallback={setSectionFromValues}
+                        <InputSection isAuthorized={authorized} values={sectionFromValues} valuesCallback={setSectionFromValues}
                                       config={FIRST_ROW_INPUT_VALUES}
                         />
                         <div className={styles.swapEntries}>
                             <IconButton onClick={swapEntries} icon="SwitchAltRoundedBlue"/>
                         </div>
-                        <InputSection values={sectionToValues} valuesCallback={setSectionToValues}
+                        <InputSection isAuthorized={authorized} values={sectionToValues} valuesCallback={setSectionToValues}
                                       config={SECOND_ROW_INPUT_VALUES}
 
                         />
