@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         margin: "24px 48px",
         display: 'flex',
         flexDirection: "row",
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         width: "60%",
         [theme.breakpoints.down('md')]: {
@@ -88,8 +88,8 @@ const Header = (props: THeader) => {
             <div className={styles.wallet}>
                 {props.isAuthorized ?
                     <>
-                        <Button isFullWidth={true} isDisabled={false}
-                                onClick={() => console.log("something")}
+                        <Button isFullWidth={false} isDisabled={false}
+                                onClick={() => console.log("Does it have do something? :-D ")}
                                 preIcon={"Eth-mainnet"}
                                 postIcon={"RepeatRounded"}
                                 text={"0x3452...3d27"}

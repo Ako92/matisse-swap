@@ -9,13 +9,13 @@ type TColor = 'grey' | 'dark-blue' | "blue";
 interface TStyles {
     color: TColor;
     isFullWidth: boolean;
+    preIcon?: string;
+    postIcon?: string;
 }
 
 interface Props extends TStyles {
     isDisabled: boolean;
     text?: string;
-    preIcon?: string;
-    postIcon?: string;
     onClick: () => void;
 }
 
@@ -45,20 +45,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 
     },
     span: {
-        margin: "0px 16px"
+        margin: "0px 16px",
+        [theme.breakpoints.down('md')]: {
+            margin: (props: TStyles) =>
+                props.preIcon && props.postIcon ? "0 2px" : "0px 16px"
+
+        },
     }
 }));
 
-export default function ({color, isFullWidth, ...props}: Props & Omit<ButtonProps, keyof Props>) {
-    const classes = useStyles({color, isFullWidth});
+export default function ({color, isFullWidth, preIcon, postIcon, ...props}: Props & Omit<ButtonProps, keyof Props>) {
+    const classes = useStyles({color, isFullWidth, preIcon, postIcon});
     return (
         <Button className={classes.root} variant={props.variant} disabled={props.isDisabled} onClick={props.onClick}>
-            {props.preIcon &&
-            <img src={`/icons/${props.preIcon}.png`} alt={props.preIcon}/>}
+            {preIcon &&
+            <img src={`/icons/${preIcon}.png`} alt={preIcon}/>}
             {props.text && <span className={classes.span}>
                 {props.text}
             </span>}
-            {props.postIcon && <img src={`/icons/${props.postIcon}.png`} alt={props.postIcon}/>}
+            {postIcon && <img src={`/icons/${postIcon}.png`} alt={postIcon}/>}
         </Button>
     )
 }
