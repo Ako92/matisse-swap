@@ -74,7 +74,7 @@ export default function InputSection({config, values, valuesCallback, isAuthoriz
                                }, text: "MAX"
                            }}
                            hasInnerButton={config.has_max}
-                           id={config.input_title} defaultValue={"0.0"}
+                           id={config.input_title}
                            hasError={false}
                            value={values.amount}
                            onChange={(value) => {

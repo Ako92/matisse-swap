@@ -8,7 +8,6 @@ import {Button} from '@mui/material';
 interface TabProps {
     topLabel: string;
     bottomLabel: string | undefined;
-    defaultValue: string;
     hasError: boolean;
     onChange: (value: string) => void;
     id: string;
@@ -53,7 +52,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     inputContainer: {
         border: `1px solid ${theme.palette.primary.main}`,
-        backgroundColor: (Props: TStyles) => Props.isDisabled ? theme.palette.primary.main : "white",
         height: "64px",
         display: "flex",
         justifyContent: "center",
@@ -83,7 +81,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function TextInput({
                                       topLabel,
                                       bottomLabel,
-                                      defaultValue,
                                       hasError,
                                       onChange,
                                       id,
@@ -115,7 +112,6 @@ export default function TextInput({
                     className={styles.input}
                     error={hasError}
                     id={id}
-                    defaultValue={defaultValue}
                     disabled={isDisabled}
                     value={value}
                 />
