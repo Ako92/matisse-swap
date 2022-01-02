@@ -30,8 +30,11 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        '& div:first-child': {
-            margin: '0 10px'
+        '& > div': {
+            fontSize:"16px",
+            margin: '0 10px',
+            display:'inline-block',
+            width:"45%"
         }
     },
 })
@@ -52,28 +55,32 @@ export default function InputSection({config, values, valuesCallback}: TInputSec
     const styles = useStyles()
     return (
         <section className={styles.firstSection}>
-            <DropDown onChange={(item) => {
-                valuesCallback({...values, coin: coins.find(coin => coin.index === item)})
-            }} id={config.dropdown_title} currentSelected={values?.coin?.index || ""}
-                      items={coins}/>
-            <TextInput topLabel={config.input_title} bottomLabel={config.footer_text}
-                       topRightLabel={config.input_right_text}
-                       isDisabled={false}
-                       innerInputButton={{
-                           action: () => {
-                               valuesCallback({...values, amount: "1"})
-                           }, text: "MAX"
-                       }}
-                       hasInnerButton={config.has_max}
-                       id={config.input_title} defaultValue={"0.0"}
-                       hasError={false}
-                       value={values.amount}
-                       onChange={(value) => {
-                           valuesCallback({
-                               amount: value,
-                               coin: values?.coin?.index && coins.find(coin => coin.index === values?.coin?.index)
-                           })
-                       }}/>
+            <div>
+                <DropDown onChange={(item) => {
+                    valuesCallback({...values, coin: coins.find(coin => coin.index === item)})
+                }} id={config.dropdown_title} currentSelected={values?.coin?.index || ""}
+                          items={coins}/>
+            </div>
+            <div>
+                <TextInput topLabel={config.input_title} bottomLabel={config.footer_text}
+                           topRightLabel={config.input_right_text}
+                           isDisabled={false}
+                           innerInputButton={{
+                               action: () => {
+                                   valuesCallback({...values, amount: "1"})
+                               }, text: "MAX"
+                           }}
+                           hasInnerButton={config.has_max}
+                           id={config.input_title} defaultValue={"0.0"}
+                           hasError={false}
+                           value={values.amount}
+                           onChange={(value) => {
+                               valuesCallback({
+                                   amount: value,
+                                   coin: values?.coin?.index && coins.find(coin => coin.index === values?.coin?.index)
+                               })
+                           }}/>
+            </div>
         </section>
     )
 }

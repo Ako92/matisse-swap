@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: "100vh",
         width: "100vw",
         padding: 0,
-        overflow: "auto",
+        fontSize: 0,  /* parent value */
         position: 'relative',
         "& :after": {
             content: " ",
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         [theme.breakpoints.down('md')]: {
             width: "100%"
         },
-        margin: "0 32px"
+        padding: "32px"
     },
 
     firstSection: {

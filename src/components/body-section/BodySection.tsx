@@ -11,11 +11,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: "70vh",
         display: 'flex',
         position:'sticky',
-        backgroundColor: 'white !important',
-        overflow: 'auto',
+        backgroundColor: 'white',
         [theme.breakpoints.down('md')]: {
             width: "100vw",
-            height: "90vh",
+            height: "100%",
             flexDirection:'column'
         },
         margin: '0 auto',

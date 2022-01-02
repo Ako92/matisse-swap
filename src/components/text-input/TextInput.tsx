@@ -50,14 +50,14 @@ const useStyles = makeStyles((theme: Theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: 'center',
-        width: "324px",
+        width: "100%",
         margin: "8px 0"
     },
     innerInput: {
         backgroundColor: 'rgba(31, 109, 201, 0.2)',
         borderRadius: 0,
         height: '40px',
-        width: '70px',
+        // width: '70px',
         margin: "20px",
         boxShadow: 'none',
 

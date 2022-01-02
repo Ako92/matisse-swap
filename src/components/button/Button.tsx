@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         backgroundColor: (props: TStyles) => {
             if (props.color === 'grey') return theme.palette.primary.main;
             if (props.color === "blue") return "rgba(31, 109, 201, 1)";
-            if (props.color === "dark-blue") return theme.palette.secondary.main;
+            if (props.color === "dark-blue") return theme.palette.primary.main;
         },
         display: "flex",
         height: "64px",
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         borderRadius: 0,
         '&:hover': {
             backgroundColor: (props: TStyles) =>
-                props.color === 'grey' ? theme.palette.primary.main : theme.palette.secondary.main,
+                props.color === 'grey' ? theme.palette.secondary.main : theme.palette.primary.main,
             borderColor: 'none',
             boxShadow: 'none',
         },

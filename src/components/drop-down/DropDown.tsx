@@ -16,17 +16,19 @@ interface IDropDown {
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        width: "100%",
     },
     formControl: {
         height: "64px",
-        minWidth: "261px",
+        width: "100%",
+
         margin: "7px 0",
     },
     select: {
         borderColor: theme.palette.primary.main,
         height: "64px",
-        width: "261px",
+        width: "100%",
         justifyContent: "center",
         alignItems: 'center',
         borderRadius: 0,

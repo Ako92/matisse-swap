@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme:Theme)=>({
         color: "rgba(31, 109, 201, 1)",
         display: 'inline-block',
         marginTop: "40px",
+        [theme.breakpoints.down('md')]: {
+            marginTop: "10px",
+        },
         all: 'unset',
         cursor: 'pointer',
     },
