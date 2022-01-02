@@ -14,7 +14,7 @@ interface IDropDown {
 
 
 const useStyles = makeStyles((theme: Theme) => ({
-    container:{
+    container: {
         height: "64px",
         minWidth: "261px",
     },
@@ -43,9 +43,12 @@ const useStyles = makeStyles((theme: Theme) => ({
         paddingRight: "16px",
         paddingLeft: "24px",
     },
-    inputLabel:{
-        fontSize:"20px",
-        paddingLeft:"24px"
+    inputLabel: {
+        fontSize: "20px",
+        paddingLeft: "24px"
+    },
+    arrow:{
+        paddingRight: "30px",
     }
 }));
 
@@ -61,13 +64,15 @@ export default function DropDown({items, onChange, id, currentSelected}: IDropDo
     };
     return (
         <FormControl className={styles.container}>
-            <InputLabel className={styles.inputLabel} id="Select-item" htmlFor={id} shrink={false}>{currentSelected === '' && 'Select'}</InputLabel>
+            <InputLabel className={styles.inputLabel} id="Select-item" htmlFor={id}
+                        shrink={false}>{currentSelected === '' && 'Select'}</InputLabel>
             <Select
                 labelId={id}
                 id={id}
                 value={currentSelected}
                 onChange={handleChange}
                 className={styles.select}
+                IconComponent={() => <img className={styles.arrow} src={"/icons/ArrowDown.png"} alt="arrow-down"/>}
             >
                 {items.map((item) => (
                     <MenuItem
