@@ -2,13 +2,30 @@ import React from 'react'
 import DropDown from '../drop-down/DropDown';
 import TextInput from '../text-input/TextInput';
 import {makeStyles} from '@mui/styles';
-import {Theme} from '@mui/material/styles';
 
 type TInputSection = {
-    valuesCallback: (values:object) => void
+    valuesCallback: (element: any) => void;
+    config: {
+        dropdown_title: string;
+        input_title: string;
+        input_right_text?: string;
+        footer_text?: string;
+        error_text?: string;
+        has_max: boolean;
+    }
+    values: TValues
+}
+type TValues = {
+    amount: string;
+    coin: TCoin | undefined
+}
+type TCoin = {
+    name: string;
+    icon: string;
+    index: string
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles({
     firstSection: {
         display: 'flex',
         flexDirection: 'row',
@@ -17,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
             margin: '0 10px'
         }
     },
-}))
+})
 
 const coins = [
     {name: "ETH", icon: "Eth-mainnet", index: "0"},
@@ -30,23 +47,32 @@ const coins = [
         name: "Matic",
         icon: "polygon-matic", index: "2"
     }]
-export default function InputSection(props: TInputSection) {
-    const [selectedItem, setSelectedItem] = React.useState("")
+export default function InputSection({config, values, valuesCallback}: TInputSection) {
+
     const styles = useStyles()
     return (
         <section className={styles.firstSection}>
             <DropDown onChange={(item) => {
-                setSelectedItem(item)
-            }} id={"name"} currentSelected={selectedItem}
+                valuesCallback({...values, coin: coins.find(coin => coin.index === item)})
+            }} id={config.dropdown_title} currentSelected={values?.coin?.index || ""}
                       items={coins}/>
-            <TextInput topLabel={"topLabel"} bottomLabel={"bottomLabel"}
-                       topRightLabel={"toopRightLabel"}
+            <TextInput topLabel={config.input_title} bottomLabel={config.footer_text}
+                       topRightLabel={config.input_right_text}
                        isDisabled={false}
-                       innerInputButton={{action: () => console.log("clicked"), text: "MAX"}}
-                       id="something" defaultValue={"default"} helperText={"help me"}
+                       innerInputButton={{
+                           action: () => {
+                               valuesCallback({...values, amount: "1"})
+                           }, text: "MAX"
+                       }}
+                       hasInnerButton={config.has_max}
+                       id={config.input_title} defaultValue={"0.0"}
                        hasError={false}
+                       value={values.amount}
                        onChange={(value) => {
-                           console.log("value", value)
+                           valuesCallback({
+                               amount: value,
+                               coin: values?.coin?.index && coins.find(coin => coin.index === values?.coin?.index)
+                           })
                        }}/>
         </section>
     )
