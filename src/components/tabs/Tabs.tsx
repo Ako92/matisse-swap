@@ -13,14 +13,19 @@ interface TabProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
     box: {
-        width: "600px",
+        display: 'block',
+        margin: '0 auto',
         fontSize: "20px",
+        width: "60vw",
+        position: "relative",
         [theme.breakpoints.down('md')]: {
             width: "100vw",
             fontSize: "18px"
         },
     },
-    tabs: {},
+    tabs: {
+        position:'relative'
+    },
     tab: {
         [`&.${tabClasses.selected}`]: {
             backgroundColor: theme.palette.secondary.main,
@@ -31,8 +36,11 @@ const useStyles = makeStyles((theme: Theme) => ({
         color: theme.palette.primary.main,
         width: "50%",
 
-
+    },
+    children: {
+        backgroundColor: "#FFF"
     }
+
 }));
 
 
@@ -50,13 +58,14 @@ export default function TabsComponent({children, tabChangeCallback, current_tab}
     const styles = useStyles()
     return (
         <Box className={styles.box}>
-            <Box>
                 <Tabs className={styles.tabs} value={current_tab} onChange={handleChange} aria-label="main tab">
                     <Tab className={styles.tab} label="Swap" {...a11yProps(0)} />
                     <Tab className={styles.tab} label="Pool" {...a11yProps(1)} />
                 </Tabs>
-            </Box>
-            {children}
+
+            <div className={styles.children}>
+                {children}
+            </div>
         </Box>
     );
 }

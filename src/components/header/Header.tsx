@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         [theme.breakpoints.down('md')]: {
             margin: "30px 16px"
         },
-        justifySelf: 'center'
     },
     wallet: {
         margin: "24px 48px",

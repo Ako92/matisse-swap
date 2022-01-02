@@ -37,10 +37,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     label: {
         display: 'flex',
         alignSelf: "flex-start ",
-
+        fontSize:"14px"
     },
     topRightLabel: {
         alignSelf: "flex-end ",
+        fontSize:"14px"
     },
     inputContainer: {
         border: `1px solid ${theme.palette.primary.main}`,
