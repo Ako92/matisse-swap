@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     inputLabel:{
         fontSize:"20px",
+        paddingLeft:"24px"
     }
 }));
 
